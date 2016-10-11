@@ -380,7 +380,7 @@
         @click="changePermission"
         :checked="permission==='granted'"
         :disabled="permission!=='default'" />
-      <label for="auto" class="auto-txt">开启消息通知</label>
+      <label for="auto" class="auto-txt">开启消息通知 {{permissionTip}}</label>
     </div>
 
   </div>
@@ -591,12 +591,21 @@ export default {
     },
     logDisabled() {
       return this.status !== 'main' || this.uinError
+    },
+    permissionTip() {
+      switch (this.permission) {
+        case 'default':
+          return '(未设置)'
+        case 'granted':
+          return '(已开启)'
+        case 'denied':
+          return '(已禁止)'
+        default:
+          return ''
+      }
     }
   },
   ready() {}
   // transitions: {}
 }
-
-
-
 </script>
